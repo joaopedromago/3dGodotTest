@@ -1,2 +1,2 @@
 # 3dGodotTest
-3D Godot Test
+testing 3D tools on Godot
