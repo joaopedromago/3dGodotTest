@@ -5,7 +5,7 @@ class_name MovementService
 var player: CharacterBody3D
 var twist_pivot: Node3D
 var pitch_pivot: Node3D
-var body_mesh: MeshInstance3D
+var player_mesh: Node3D
 var has_double_jump := false
 var is_running := false
 var speed: float
@@ -14,12 +14,12 @@ func _init(
 	player_arg: CharacterBody3D,
 	twist_pivot_arg: Node3D,
 	pitch_pivot_arg: Node3D,
-	body_mesh_arg: MeshInstance3D
+	player_mesh_arg: Node3D
 ):
 	player = player_arg
 	twist_pivot = twist_pivot_arg
 	pitch_pivot = pitch_pivot_arg
-	body_mesh = body_mesh_arg
+	player_mesh = player_mesh_arg
 	
 	speed = Application.speed
 
@@ -31,6 +31,7 @@ func process(delta: float):
 	_perform_jump()
 	
 	
+# TODO: add climb feature
 # TODO: add crouch feature with R analog click
 # TODO: jumping while crouch is higher than jumping while standing
 
@@ -63,12 +64,17 @@ func _change_character_direction(delta: float):
 
 	var input_vector = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	var angle_rad = atan2(input_vector.x * -1, input_vector.y * -1)
+	var angle_rad = atan2(input_vector.x, input_vector.y)
 
 	if input_vector.x != 0 or input_vector.y != 0:
-		body_mesh.set_basis(looking_direction)
-		body_mesh.rotate_y(angle_rad)
-
+		if is_running:
+			player_mesh.get_node("AnimationPlayer").play("run_forward")			
+		else:
+			player_mesh.get_node("AnimationPlayer").play("walk_forward")			
+		player_mesh.set_basis(looking_direction)
+		player_mesh.rotate_y(angle_rad)
+	else:
+		player_mesh.get_node("AnimationPlayer").play("idle")
 
 func _perform_jump():
 	if Input.is_action_just_pressed("jump"):
@@ -76,6 +82,7 @@ func _perform_jump():
 			return
 		if player.is_on_floor():
 			has_double_jump = true
+			player.velocity.y = Application.jump_strength
 		elif has_double_jump == true:
 			has_double_jump = false
-		player.velocity.y = Application.jump_strength
+			player.velocity.y = Application.jump_strength / 2

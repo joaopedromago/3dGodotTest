@@ -8,7 +8,7 @@ var UserInputService = preload("res://src/scenes/player/services/userInput.gd")
 
 @onready var twist_pivot := $TwistPivot
 @onready var pitch_pivot := $TwistPivot/PitchPivot
-@onready var body_mesh := $BodyMesh
+@onready var player_mesh := $Mesh
 
 var camera_service: CameraService
 var movement_service: MovementService
@@ -18,9 +18,9 @@ var user_input_service: UserInputService
 
 
 func _ready():
-	shader_service = ShaderService.new(self, body_mesh)
-	camera_service = CameraService.new(self, twist_pivot, pitch_pivot, body_mesh, shader_service)
-	movement_service = MovementService.new(self, twist_pivot, pitch_pivot, body_mesh)
+	shader_service = ShaderService.new(self, player_mesh)
+	camera_service = CameraService.new(self, twist_pivot, pitch_pivot, player_mesh, shader_service)
+	movement_service = MovementService.new(self, twist_pivot, pitch_pivot, player_mesh)
 	physics_service = PhysicsService.new(self)
 	user_input_service = UserInputService.new()
 
