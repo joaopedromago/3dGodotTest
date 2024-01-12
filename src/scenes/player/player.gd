@@ -35,7 +35,13 @@ func _process(delta: float):
 	user_input_service.process()
 	camera_service.process(delta)
 	movement_service.process(delta)
+	
+	# TODO: remove this
+	if Input.is_action_just_pressed("action"):
+		position.y = 50
+		
 	move_and_slide()
+	
 
 
 func _physics_process(delta: float):

@@ -30,6 +30,9 @@ func jump():
 
 func perform_roll():
 	player_animation.play("roll")
+
+func perform_fall():
+	player_animation.play("fall_down")
 	
 func is_on_animation() -> bool:
 	return player_animation.is_playing()
