@@ -9,10 +9,10 @@ var twist_pivot: Node3D
 var pitch_pivot: Node3D
 var player_mesh: Node3D
 var has_double_jump := false
-var is_running := false
+var is_jumping := false
+var is_rolling := false
+var running_timer := 0
 var speed: float
-var running_timer: Timer
-
 
 func _init(
 	player_arg: CharacterBody3D,
@@ -28,42 +28,47 @@ func _init(
 
 	animation_service = animation_service_arg
 
-	running_timer = Timer.new()
-
 	speed = Application.speed
 
 
 func process(delta: float):
-	_handle_run_dodge()
+	_handle_run(delta)
 	_handle_movement(delta)
+	_handle_jump_landing()
 	_handle_jump()
-	_change_character_direction(delta)
+	_animate_character_on_move(delta)
 
 
 # TODO: add climb feature
 # TODO: add crouch feature with R analog click
 # TODO: jumping while crouch is higher than jumping while standing
 
-
-func _handle_run_dodge():
-	if Input.is_action_pressed("run_dodge") and !is_running:
-		running_timer.start(311111.0)
-		is_running = true
-		speed = speed * 1.5
+func _handle_run(delta: float):
+	if is_rolling and not animation_service.is_on_animation():
+			_stop_roll()
+	if _is_on_action():
+		return
+	if Input.is_action_pressed("run_dodge"):
+		running_timer += 1
+		_change_speed(Application.running_speed)
 	if Input.is_action_just_released("run_dodge"):
-		var a = running_timer.time_left
-		running_timer.stop()
-		print("stop", a)
-		is_running = false
-		speed = Application.speed
-
-
-func _perform_dodge():
-	print("rolling")
-	#animation_service.roll()
-
-
+		var time_running = running_timer * delta
+		_change_speed(Application.speed)
+		if time_running < 0.2:
+			_perform_roll()
+		running_timer = 0
+		
+func _change_speed(new_speed: float, over_limit := false):
+	if over_limit:
+		speed = new_speed
+	else:
+		speed = clampf(new_speed, Application.speed, Application.running_speed)
+	
+	
 func _handle_movement(delta: float):
+	if _is_on_action():
+		return
+		
 	var variations = speed * delta
 
 	var input_vector = (
@@ -76,24 +81,22 @@ func _handle_movement(delta: float):
 	)
 
 
-func _change_character_direction(delta: float):
+func _animate_character_on_move(delta: float):
 	var looking_direction = twist_pivot.basis
 
 	var input_vector = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
 	var angle_rad = atan2(input_vector.x, input_vector.y)
-	var is_on_floor = player.is_on_floor()
 
-	if input_vector.x != 0 or input_vector.y != 0:
-		if is_running and is_on_floor:
+	if (input_vector.x != 0 or input_vector.y != 0) and not _is_on_action():
+		if _is_running():
 			animation_service.run_forward()
-		elif is_on_floor:
+		else:
 			animation_service.walk_forward()
 		player_mesh.set_basis(looking_direction)
 		player_mesh.rotate_y(angle_rad)
-	elif is_on_floor:
+	elif not _is_on_action():
 		animation_service.idle()
-
 
 func _handle_jump():
 	if Input.is_action_just_pressed("jump"):
@@ -101,12 +104,37 @@ func _handle_jump():
 			return
 		if player.is_on_floor():
 			has_double_jump = true
+			animation_service.jump()
 			_perform_jump(Application.jump_strength)
 		elif has_double_jump == true:
 			has_double_jump = false
+			animation_service.perform_roll()
 			_perform_jump(Application.jump_strength / 2)
 
-
+func _handle_jump_landing():
+	if player.get_slide_collision_count() > 0 and player.is_on_floor() and _is_on_action():
+		is_jumping = false
+		has_double_jump = false	
+		speed = Application.running_speed
+		
 func _perform_jump(velocity: float):
-	animation_service.jump_then_fall()
+	is_jumping = true
 	player.velocity.y = velocity
+
+func _is_running():
+	return speed > Application.speed
+
+func _is_on_action():
+	return is_jumping or is_rolling
+
+func _perform_roll():
+	if player.velocity.x == 0 and player.velocity.z == 0:
+		return
+		 
+	is_rolling = true
+	_change_speed(Application.rolling_speed)
+	animation_service.perform_roll()
+
+func _stop_roll():
+	is_rolling = false
+	_change_speed(Application.speed)

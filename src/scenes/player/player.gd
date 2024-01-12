@@ -20,6 +20,7 @@ var animation_service: AnimationService
 
 
 func _ready():
+	# TODO: set signals for change animation
 	animation_service = AnimationService.new(player_mesh.get_node("AnimationPlayer"))
 	shader_service = ShaderService.new(self, player_mesh)
 	camera_service = CameraService.new(self, twist_pivot, pitch_pivot, player_mesh, shader_service)

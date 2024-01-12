@@ -28,7 +28,8 @@ func walk_forward():
 func jump():
 	player_animation.play("jump_up")
 
-
-func jump_then_fall():
-	player_animation.play("jump_up")
-	player_animation.play("fall_down")
+func perform_roll():
+	player_animation.play("roll")
+	
+func is_on_animation() -> bool:
+	return player_animation.is_playing()

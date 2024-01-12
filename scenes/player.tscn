@@ -3,15 +3,16 @@
 [ext_resource type="Script" path="res://src/scenes/player/player.gd" id="1_1bynu"]
 [ext_resource type="PackedScene" uid="uid://0ytfs6ce6um4" path="res://assets/character/Godot_Chan_Stealth.glb" id="2_06etc"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_nqkgg"]
-height = 1.6
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s81ao"]
+radius = 0.28442
+height = 1.5
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_1bynu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-shape = SubResource("CylinderShape3D_nqkgg")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_s81ao")
 
 [node name="Mesh" parent="." instance=ExtResource("2_06etc")]
 
