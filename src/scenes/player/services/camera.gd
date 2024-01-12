@@ -6,7 +6,7 @@ var player: CharacterBody3D
 var twist_pivot: Node3D
 var pitch_pivot: Node3D
 var body_mesh: MeshInstance3D
-var shader_service
+var shader_service: ShaderService
 var twist_input := 0.0
 var pitch_input := 0.0
 
@@ -16,7 +16,7 @@ func _init(
 	twist_pivot_arg: Node3D,
 	pitch_pivot_arg: Node3D,
 	body_mesh_arg: MeshInstance3D,
-	shader_service_arg
+	shader_service_arg: ShaderService
 ):
 	player = player_arg
 	twist_pivot = twist_pivot_arg

@@ -7,7 +7,8 @@ var twist_pivot: Node3D
 var pitch_pivot: Node3D
 var body_mesh: MeshInstance3D
 var has_double_jump := false
-
+var is_running := false
+var speed: float
 
 func _init(
 	player_arg: CharacterBody3D,
@@ -19,16 +20,29 @@ func _init(
 	twist_pivot = twist_pivot_arg
 	pitch_pivot = pitch_pivot_arg
 	body_mesh = body_mesh_arg
+	
+	speed = Application.speed
 
 
 func process(delta: float):
+	_check_character_speed()
 	_perform_character_movement(delta)
 	_change_character_direction(delta)
 	_perform_jump()
 
+func _check_character_speed():
+	if Input.is_action_just_pressed("run_dodge") and !is_running:
+		is_running = true
+		speed = speed * 1.5
+	if Input.is_action_just_released("run_dodge"):
+		is_running = false
+		speed = Application.speed
+	if Input.is_action_just_pressed("run_dodge"):
+		print("rolling")
+		# TODO: validar rolamento
 
 func _perform_character_movement(delta: float):
-	var variations = Application.speed * delta
+	var variations = speed * delta
 
 	var input_vector = (
 		Input.get_vector("move_left", "move_right", "move_forward", "move_back") * variations
