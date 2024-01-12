@@ -29,6 +29,10 @@ func process(delta: float):
 	_perform_character_movement(delta)
 	_change_character_direction(delta)
 	_perform_jump()
+	
+	
+# TODO: add crouch feature with R analog click
+# TODO: jumping while crouch is higher than jumping while standing
 
 func _check_character_speed():
 	if Input.is_action_just_pressed("run_dodge") and !is_running:

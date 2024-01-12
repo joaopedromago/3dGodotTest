@@ -29,6 +29,9 @@ func process(delta: float):
 	_handle_camera_input(delta)
 	_update_camera_movement()
 
+# TODO: add center camera feature with L analog click
+# TODO: add lock in camera with L analog click
+# TODO: add camera collision auto adjust
 
 func handle_mouse_motion_input(event: InputEvent):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
