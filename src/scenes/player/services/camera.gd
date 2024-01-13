@@ -6,7 +6,6 @@ var player: CharacterBody3D
 var twist_pivot: Node3D
 var pitch_pivot: Node3D
 var player_mesh: Node3D
-var shader_service: ShaderService
 var twist_input := 0.0
 var pitch_input := 0.0
 
@@ -15,23 +14,21 @@ func _init(
 	player_arg: CharacterBody3D,
 	twist_pivot_arg: Node3D,
 	pitch_pivot_arg: Node3D,
-	player_mesh_arg: Node3D,
-	shader_service_arg: ShaderService
+	player_mesh_arg: Node3D
 ):
 	player = player_arg
 	twist_pivot = twist_pivot_arg
 	pitch_pivot = pitch_pivot_arg
 	player_mesh = player_mesh_arg
-	shader_service = shader_service_arg
 
 
 func process(delta: float):
 	_handle_camera_input(delta)
 	_update_camera_movement()
+	_handle_lock_camera()
 
 
-# TODO: add center camera feature with L analog click
-# TODO: add lock in camera with L analog click
+# TODO: add lock in camera to target with R analog click
 
 
 func handle_mouse_motion_input(event: InputEvent):
@@ -55,13 +52,15 @@ func _update_camera_movement():
 		deg_to_rad(Application.min_camera_angle_x),
 		deg_to_rad(Application.max_camera_angle_x)
 	)
-
-	var current_x_angle = rad_to_deg(pitch_pivot.rotation.x)
-
-	if current_x_angle > Application.max_camera_angle_x - 10:
-		shader_service.change_player_opacity(0.15)
-	else:
-		shader_service.change_player_opacity(1.0)
-
+	
 	twist_input = 0.0
 	pitch_input = 0.0
+
+
+func _handle_lock_camera():
+	if Input.is_action_just_pressed("camera_lock"):
+		var player_rotation = player_mesh.rotation
+		twist_pivot.rotation = Vector3(
+			player_rotation.x, deg_to_rad(rad_to_deg(player_rotation.y) - 180), player_rotation.z
+		)
+		pitch_pivot.rotation = Vector3(deg_to_rad(-10), 0, 0)
