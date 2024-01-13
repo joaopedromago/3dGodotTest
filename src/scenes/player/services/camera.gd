@@ -32,7 +32,6 @@ func process(delta: float):
 
 # TODO: add center camera feature with L analog click
 # TODO: add lock in camera with L analog click
-# TODO: add camera collision auto adjust
 
 
 func handle_mouse_motion_input(event: InputEvent):

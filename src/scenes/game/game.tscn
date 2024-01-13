@@ -1,10 +1,10 @@
 [gd_scene load_steps=43 format=3 uid="uid://buh2sd7gfn1jg"]
 
-[ext_resource type="Texture2D" uid="uid://cbc54epfuapmn" path="res://assets/textures/grass/wispy-grass-meadow_albedo.png" id="1_aov78"]
-[ext_resource type="PackedScene" uid="uid://cvgxmdosfprgw" path="res://scenes/player.tscn" id="1_jq0il"]
-[ext_resource type="Script" path="res://src/objects/control.gd" id="2_orlae"]
-[ext_resource type="Texture2D" uid="uid://0armj0e3ucjr" path="res://assets/textures/grass/wispy-grass-meadow_metallic.png" id="3_brypj"]
-[ext_resource type="Texture2D" uid="uid://60vsyswuswwu" path="res://assets/textures/grass/wispy-grass-meadow_normal-ogl.png" id="4_lqg0g"]
+[ext_resource type="Texture2D" uid="uid://cbc54epfuapmn" path="res://assets/textures/grass/wispy-grass-meadow_albedo.png" id="1_vgmvp"]
+[ext_resource type="PackedScene" uid="uid://cvgxmdosfprgw" path="res://src/scenes/player/player.tscn" id="2_ktid0"]
+[ext_resource type="Texture2D" uid="uid://0armj0e3ucjr" path="res://assets/textures/grass/wispy-grass-meadow_metallic.png" id="3_taapl"]
+[ext_resource type="Texture2D" uid="uid://60vsyswuswwu" path="res://assets/textures/grass/wispy-grass-meadow_normal-ogl.png" id="4_df4uk"]
+[ext_resource type="Script" path="res://src/objects/control.gd" id="5_y1ngl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wbnam"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,7 +20,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drrtn"]
-albedo_texture = ExtResource("1_aov78")
+albedo_texture = ExtResource("1_vgmvp")
 clearcoat_roughness = 0.0
 anisotropy_enabled = true
 anisotropy = 1.0
@@ -101,7 +101,7 @@ shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = ExtResource("1_aov78")
+shader_parameter/texture_albedo = ExtResource("1_vgmvp")
 
 [sub_resource type="BoxMesh" id="BoxMesh_6eklr"]
 material = SubResource("ShaderMaterial_147mv")
@@ -186,7 +186,7 @@ shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = ExtResource("3_brypj")
+shader_parameter/texture_albedo = ExtResource("3_taapl")
 
 [sub_resource type="BoxMesh" id="BoxMesh_8ob0f"]
 material = SubResource("ShaderMaterial_e4lap")
@@ -232,7 +232,7 @@ size = Vector3(3, 1, 3)
 data = PackedVector3Array(-1.5, 0.5, 1.5, 1.5, 0.5, 1.5, -1.5, -0.5, 1.5, 1.5, 0.5, 1.5, 1.5, -0.5, 1.5, -1.5, -0.5, 1.5, 1.5, 0.5, -1.5, -1.5, 0.5, -1.5, 1.5, -0.5, -1.5, -1.5, 0.5, -1.5, -1.5, -0.5, -1.5, 1.5, -0.5, -1.5, 1.5, 0.5, 1.5, 1.5, 0.5, -1.5, 1.5, -0.5, 1.5, 1.5, 0.5, -1.5, 1.5, -0.5, -1.5, 1.5, -0.5, 1.5, -1.5, 0.5, -1.5, -1.5, 0.5, 1.5, -1.5, -0.5, -1.5, -1.5, 0.5, 1.5, -1.5, -0.5, 1.5, -1.5, -0.5, -1.5, 1.5, 0.5, 1.5, -1.5, 0.5, 1.5, 1.5, 0.5, -1.5, -1.5, 0.5, 1.5, -1.5, 0.5, -1.5, 1.5, 0.5, -1.5, -1.5, -0.5, 1.5, 1.5, -0.5, 1.5, -1.5, -0.5, -1.5, 1.5, -0.5, 1.5, 1.5, -0.5, -1.5, -1.5, -0.5, -1.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2b60v"]
-albedo_texture = ExtResource("4_lqg0g")
+albedo_texture = ExtResource("4_df4uk")
 
 [sub_resource type="PrismMesh" id="PrismMesh_r0h7q"]
 material = SubResource("StandardMaterial3D_2b60v")
@@ -259,7 +259,7 @@ mesh = SubResource("PlaneMesh_g28ap")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_7u8cy")
 
-[node name="Player" parent="." instance=ExtResource("1_jq0il")]
+[node name="Player" parent="." instance=ExtResource("2_ktid0")]
 top_level = true
 
 [node name="Objects" type="Node3D" parent="."]
@@ -361,7 +361,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("2_orlae")
+script = ExtResource("5_y1ngl")
 
 [node name="FpsInfo" type="Label" parent="Control"]
 top_level = true

@@ -117,7 +117,7 @@ func _handle_jump_landing():
 
 func _handle_fall():
 	var fall_speed = player.velocity.y * -1
-	if fall_speed > 5:
+	if fall_speed > 7:
 		is_falling = true
 		animation_service.perform_fall()
 	else:
