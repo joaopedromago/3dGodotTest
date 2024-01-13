@@ -15,14 +15,21 @@ var movement_service: MovementService
 var physics_service: PhysicsService
 var user_input_service: UserInputService
 var animation_service: AnimationService
-
+var player_status := {
+ "has_double_jump" : false,
+ "is_jumping" : false,
+ "is_rolling" : false,
+ "is_falling" : false,
+ "is_crouching" : false,
+ "lock_at": null
+}
 
 func _ready():
 	# TODO: set signals for change animation
 	animation_service = AnimationService.new(player_mesh.get_node("AnimationPlayer"))
-	camera_service = CameraService.new(self, twist_pivot, pitch_pivot, player_mesh)
+	camera_service = CameraService.new(self, twist_pivot, pitch_pivot, player_mesh, player_status)
 	movement_service = MovementService.new(
-		self, twist_pivot, pitch_pivot, player_mesh, animation_service
+		self, twist_pivot, pitch_pivot, player_mesh, animation_service, player_status
 	)
 	physics_service = PhysicsService.new(self)
 	user_input_service = UserInputService.new()

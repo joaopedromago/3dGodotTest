@@ -23,7 +23,33 @@ func run_forward():
 
 func walk_forward():
 	player_animation.play("walk_forward")
+	
+	
+func walk_forward_right():
+	player_animation.play("walk_forward_right")
+	
+	
+func walk_forward_left():
+	player_animation.play("walk_forward_left")
 
+
+func walk_backward():
+	player_animation.play("walk_backward")
+	
+	
+func walk_backward_right():
+	player_animation.play("walk_back_right")
+	
+	
+func walk_backward_left():
+	player_animation.play("walk_back_left")
+
+func walk_right():
+	player_animation.play("walk_right")
+	
+	
+func walk_left():
+	player_animation.play("walk_left")
 
 func jump():
 	player_animation.play("jump_up")
