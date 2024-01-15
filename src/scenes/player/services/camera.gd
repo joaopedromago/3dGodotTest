@@ -10,6 +10,7 @@ var twist_input := 0.0
 var pitch_input := 0.0
 var player_status: Dictionary
 
+
 func _init(
 	player_arg: CharacterBody3D,
 	twist_pivot_arg: Node3D,
@@ -29,9 +30,6 @@ func process(delta: float):
 	_update_camera_movement()
 	_handle_lock_camera()
 	_perform_look_at()
-
-
-# TODO: add lock in camera to target with R analog click
 
 
 func handle_mouse_motion_input(event: InputEvent):
@@ -55,7 +53,7 @@ func _update_camera_movement():
 		deg_to_rad(Application.min_camera_angle_x),
 		deg_to_rad(Application.max_camera_angle_x)
 	)
-	
+
 	twist_input = 0.0
 	pitch_input = 0.0
 
@@ -70,23 +68,35 @@ func _handle_lock_camera():
 		var enemies = player.get_tree().get_nodes_in_group("Enemies")
 		var nearest_enemy: Node3D
 		var nearest_enemy_distance: float = 25
-		
+
 		for enemy in enemies:
 			var distance = enemy.position.distance_to(player.position)
 			if nearest_enemy_distance > distance:
 				nearest_enemy_distance = distance
 				nearest_enemy = enemy
-		
+
 		if nearest_enemy:
 			player_status.lock_at = nearest_enemy
 			player_status.is_locker_in = true
 			player_status.lock_at.emit_signal("set_lock_on")
+			_set_camera_to_target()
 		else:
 			var player_rotation = player_mesh.rotation
 			twist_pivot.rotation = Vector3(
-				player_rotation.x, deg_to_rad(rad_to_deg(player_rotation.y) - 180), player_rotation.z
+				player_rotation.x,
+				deg_to_rad(rad_to_deg(player_rotation.y) - 180),
+				player_rotation.z
 			)
 			pitch_pivot.rotation = Vector3(deg_to_rad(-10), 0, 0)
+
+
+func _set_camera_to_target():
+	var direction = Utils.get_direction_to(player.position, player_status.lock_at.position)
+
+	var player_rotation = player_mesh.rotation
+	twist_pivot.rotation = Vector3(twist_pivot.rotation.x, direction, twist_pivot.rotation.z)
+	pitch_pivot.rotation = Vector3(deg_to_rad(-10), 0, 0)
+
 
 func _perform_look_at():
 	if player_status.lock_at:

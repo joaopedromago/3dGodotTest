@@ -33,5 +33,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 7, -0.011)
 visible = false
 mesh = SubResource("TextMesh_ks8hy")
 
+[connection signal="activate_walking_animation" from="." to="." method="_on_activate_walking_animation"]
 [connection signal="set_lock_off" from="." to="." method="_on_set_lock_off"]
 [connection signal="set_lock_on" from="." to="." method="_on_set_lock_on"]

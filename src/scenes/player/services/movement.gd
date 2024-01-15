@@ -44,10 +44,10 @@ func process(delta: float):
 
 
 # TODO: add climb feature
+# TODO: add crouch feature
 
 
 func _handle_crouch():
-	# TODO: add crouch feature
 	if _is_on_action():
 		return
 
@@ -166,8 +166,10 @@ func _animate_character_on_move(delta: float):
 					animation_service.walk_forward()
 				elif movement_y < 0:
 					animation_service.walk_backward()
-			player_mesh.set_basis(looking_direction)
-			player_mesh.rotate_y(deg_to_rad(180))
+
+			var direction = Utils.get_direction_to(player.position, player_status.lock_at.position)
+			player_mesh.rotation = Vector3(player_mesh.rotation.x, 0, player_mesh.rotation.z)
+			player_mesh.rotate_y(direction + deg_to_rad(180))
 			return
 		elif _is_running() and not player_status.is_falling:
 			animation_service.run_forward()
