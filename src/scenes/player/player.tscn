@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvgxmdosfprgw"]
 
 [ext_resource type="Script" path="res://src/scenes/player/player.gd" id="1_1bynu"]
-[ext_resource type="PackedScene" uid="uid://0ytfs6ce6um4" path="res://assets/character/Godot_Chan_Stealth.glb" id="2_06etc"]
+[ext_resource type="PackedScene" uid="uid://dk4sn8ox4cd4q" path="res://src/scenes/player/player_mesh.tscn" id="2_mmejd"]
 [ext_resource type="Script" path="res://src/scenes/player/springArm3D.gd" id="3_p015q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bk8qy"]
@@ -22,7 +22,7 @@ shape = SubResource("BoxShape3D_bk8qy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_s81ao")
 
-[node name="Mesh" parent="." instance=ExtResource("2_06etc")]
+[node name="Mesh" parent="." instance=ExtResource("2_mmejd")]
 
 [node name="TwistPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)

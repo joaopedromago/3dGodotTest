@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk4sn8ox4cd4q"]
+
+[ext_resource type="PackedScene" uid="uid://0ytfs6ce6um4" path="res://assets/character/Godot_Chan_Stealth.glb" id="1_jmm75"]
+
+[node name="PlayerMesh" instance=ExtResource("1_jmm75")]
