@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://buh2sd7gfn1jg"]
+[gd_scene load_steps=50 format=3 uid="uid://buh2sd7gfn1jg"]
 
 [ext_resource type="Script" path="res://src/scenes/game/game.gd" id="1_58pq4"]
 [ext_resource type="Texture2D" uid="uid://cbc54epfuapmn" path="res://assets/textures/grass/wispy-grass-meadow_albedo.png" id="1_vgmvp"]
@@ -250,6 +250,11 @@ data = PackedVector3Array(0, 0, -10, 0, 0, -10, 2, 0, -10, 2, 0, -10, 0, 0, -10,
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nxwo7"]
 data = PackedVector3Array(0, 0, -10, 0, 0, -10, 2, 0, -10, 2, 0, -10, 0, 0, -10, 2, 0, -10, 2, 0, -10, 2, 0, -10, 2, 0.5, -10, 2, 0.5, -10, 2, 0, -10, 2, 0.5, -8, 2, 0.5, -8, 2, 0, -10, 2, 1, -8, 2, 1, -8, 2, 0, -10, 2, 1, -6, 2, 1, -6, 2, 0, -10, 2, 1.5, -6, 2, 1.5, -6, 2, 0, -10, 2, 1.5, -4, 2, 1.5, -4, 2, 0, -10, 2, 2, -4, 2, 2, -4, 2, 0, -10, 2, 2, 0, 2, 2, 0, 2, 0, -10, 2, 0, 0, 2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, -10, 0, 0, -10, 2, 0, 0, 2, 0, 0, 0, 0, -10, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, -4, 0, 2, -4, 0, 0, 0, 0, 1.5, -4, 0, 1.5, -4, 0, 0, 0, 0, 1.5, -6, 0, 1.5, -6, 0, 0, 0, 0, 1, -6, 0, 1, -6, 0, 0, 0, 0, 1, -8, 0, 1, -8, 0, 0, 0, 0, 0.5, -8, 0, 0.5, -8, 0, 0, 0, 0, 0.5, -10, 0, 0.5, -10, 0, 0, 0, 0, 0, -10, 0, 0, -10, 0, 0, 0, 0, 0, -10, 2, 2, -4, 0, 2, -4, 2, 1.5, -4, 2, 1.5, -4, 0, 2, -4, 0, 1.5, -4, 2, 1.5, -4, 0, 1.5, -4, 2, 1.5, -6, 2, 1.5, -6, 0, 1.5, -4, 0, 1.5, -6, 2, 1.5, -6, 0, 1.5, -6, 2, 1, -6, 2, 1, -6, 0, 1.5, -6, 0, 1, -6, 2, 1, -6, 0, 1, -6, 2, 1, -8, 2, 1, -8, 0, 1, -6, 0, 1, -8, 2, 1, -8, 0, 1, -8, 2, 0.5, -8, 2, 0.5, -8, 0, 1, -8, 0, 0.5, -8, 2, 0.5, -8, 0, 0.5, -8, 2, 0.5, -10, 2, 0.5, -10, 0, 0.5, -8, 0, 0.5, -10, 2, 0.5, -10, 0, 0.5, -10, 2, 0, -10, 2, 0, -10, 0, 0.5, -10, 0, 0, -10, 0, 2, -4, 2, 2, -4, 0, 2, 0, 0, 2, 0, 2, 2, -4, 2, 2, 0)
 
+[sub_resource type="BoxMesh" id="BoxMesh_a5n1k"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jt0he"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
 [node name="Game" type="Node3D"]
 script = ExtResource("1_58pq4")
 
@@ -320,6 +325,16 @@ mesh = SubResource("BoxMesh_8ob0f")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Wall/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_gprsg")
 
+[node name="Wall2" type="MeshInstance3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.1388, 6.95502, -23.6213)
+mesh = SubResource("BoxMesh_8ob0f")
+skeleton = NodePath("../Wall")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Objects/Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Wall2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_gprsg")
+
 [node name="40cm" type="MeshInstance3D" parent="Objects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.912, 0.2, 0)
 mesh = SubResource("BoxMesh_50r0s")
@@ -383,6 +398,15 @@ mesh = ExtResource("5_tlg0p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/SmallStair/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_nxwo7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 2.815)
+mesh = SubResource("BoxMesh_a5n1k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Objects/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jt0he")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

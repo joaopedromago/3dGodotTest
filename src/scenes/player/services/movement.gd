@@ -43,21 +43,20 @@ func process(delta: float):
 	_animate_character_on_move(delta)
 
 
-# TODO: add climb feature
-# TODO: add crouch feature
-
-
 func _handle_crouch():
-	if _is_on_action():
+	if _is_on_action() and !_is_running():
 		return
 
 	if Input.is_action_just_pressed("crouch") and (not _is_running()):
 		player_status.is_crouching = !player_status.is_crouching
+		print()
 		if player_status.is_crouching:
-			# fix hitbox
+			player.get_node("Shape").position.y = player.get_node("Shape").position.y / 2
+			player.get_node("Shape").scale.y = player.get_node("Shape").scale.y / 2
 			pass
 		else:
-			# revert hitbox
+			player.get_node("Shape").position.y = 0.75
+			player.get_node("Shape").scale.y = 1
 			pass
 
 
@@ -103,7 +102,11 @@ func _handle_jump():
 		if player.is_on_floor():
 			player_status.has_double_jump = true
 			animation_service.jump()
-			_perform_jump(Application.jump_strength)
+			if player_status.is_crouching:
+				_perform_jump(Application.jump_strength * 1.5)
+				player_status.is_crouching = false
+			else:				
+				_perform_jump(Application.jump_strength)
 		elif player_status.has_double_jump == true:
 			player_status.has_double_jump = false
 			animation_service.perform_roll()

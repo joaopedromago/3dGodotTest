@@ -26,7 +26,7 @@ var player_status := {
 
 
 func _ready():
-	animation_service = AnimationService.new(player_mesh.get_node("AnimationPlayer"))
+	animation_service = AnimationService.new(player_mesh.get_node("AnimationPlayer"), player_status)
 	camera_service = CameraService.new(self, twist_pivot, pitch_pivot, player_mesh, player_status)
 	movement_service = MovementService.new(
 		self, twist_pivot, pitch_pivot, player_mesh, animation_service, player_status
