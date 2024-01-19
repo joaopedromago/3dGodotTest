@@ -179,6 +179,9 @@ func _animate_character_on_move(delta: float):
 		elif not player_status.is_falling:
 			animation_service.walk_forward()
 		player_mesh.set_basis(looking_direction)
+		player_mesh.scale.x = 0.008
+		player_mesh.scale.y = 0.008
+		player_mesh.scale.z = 0.008
 		player_mesh.rotate_y(angle_rad)
 	elif not _is_on_action():
 		animation_service.idle()

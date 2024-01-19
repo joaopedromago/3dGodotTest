@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvgxmdosfprgw"]
 
 [ext_resource type="Script" path="res://src/scenes/player/player.gd" id="1_1bynu"]
-[ext_resource type="PackedScene" uid="uid://dk4sn8ox4cd4q" path="res://src/scenes/player/player_mesh.tscn" id="2_mmejd"]
+[ext_resource type="PackedScene" uid="uid://l8cdmoe36at" path="res://assets/character/player.gltf" id="2_3qmfb"]
 [ext_resource type="Script" path="res://src/scenes/player/springArm3D.gd" id="3_p015q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s81ao"]
@@ -15,7 +15,8 @@ script = ExtResource("1_1bynu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_s81ao")
 
-[node name="Mesh" parent="." instance=ExtResource("2_mmejd")]
+[node name="Mesh" parent="." instance=ExtResource("2_3qmfb")]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 0.008, 0, 0.717311, 0)
 
 [node name="TwistPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
