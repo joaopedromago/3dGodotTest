@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvgxmdosfprgw"]
 
 [ext_resource type="Script" path="res://src/scenes/player/player.gd" id="1_1bynu"]
-[ext_resource type="PackedScene" uid="uid://l8cdmoe36at" path="res://assets/character/player.gltf" id="2_3qmfb"]
+[ext_resource type="PackedScene" uid="uid://j2dd46hec511" path="res://assets/character/player.gltf" id="2_3qmfb"]
 [ext_resource type="Script" path="res://src/scenes/player/springArm3D.gd" id="3_p015q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s81ao"]

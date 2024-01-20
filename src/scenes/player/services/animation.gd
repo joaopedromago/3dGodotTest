@@ -91,6 +91,10 @@ func jump():
 
 func perform_roll():
 	player_animation.play("Roll")
+	
+	
+func perform_fall_roll():
+	player_animation.play("Fall_roll")
 
 
 func perform_fall():

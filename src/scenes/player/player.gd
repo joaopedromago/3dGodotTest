@@ -47,6 +47,7 @@ func _process(delta: float):
 
 func _physics_process(delta: float):
 	physics_service.process(delta)
+	movement_service.physics_process(delta)
 
 
 func _unhandled_input(event: InputEvent):

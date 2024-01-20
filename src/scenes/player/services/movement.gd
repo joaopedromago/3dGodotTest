@@ -34,14 +34,15 @@ func _init(
 
 
 func process(delta: float):
-	_handle_run(delta)
-	_handle_movement(delta)
 	_handle_jump_landing()
 	_handle_jump()
 	_handle_fall()
 	_handle_crouch()
-	_animate_character_on_move(delta)
+	_animate_character_on_move()
 
+func physics_process(delta):
+	_handle_run(delta)
+	_handle_movement(delta)
 
 func _handle_crouch():
 	if _is_on_action() and !_is_running():
@@ -109,7 +110,7 @@ func _handle_jump():
 				_perform_jump(Application.jump_strength)
 		elif player_status.has_double_jump == true:
 			player_status.has_double_jump = false
-			animation_service.perform_roll()
+			animation_service.jump()
 			_perform_jump(Application.jump_strength / 2)
 
 
@@ -133,10 +134,10 @@ func _handle_fall():
 	elif last_fall_speed > 0:
 		print("Falled from ", last_fall_speed)
 		last_fall_speed = 0
-		_perform_roll()
+		_perform_roll(true)
 
 
-func _animate_character_on_move(delta: float):
+func _animate_character_on_move():
 	var looking_direction = twist_pivot.basis
 
 	var input_vector = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -207,13 +208,16 @@ func _is_on_action():
 	return player_status.is_jumping or player_status.is_rolling or player_status.is_falling
 
 
-func _perform_roll():
+func _perform_roll(fall: bool = false):
 	if player.velocity.x == 0 and player.velocity.z == 0:
 		return
 
 	player_status.is_rolling = true
 	_change_speed(Application.rolling_speed)
-	animation_service.perform_roll()
+	if fall:
+		animation_service.perform_fall_roll()
+	else:
+		animation_service.perform_roll()
 
 
 func _stop_roll():
